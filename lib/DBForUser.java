@@ -2,12 +2,14 @@ import java.sql.*;
 public class DBForUser {
     //连接到数据库的URL
     private final String DBURL = "jdbc:mysql://localhost:3306/NETWORK?useUnicode=true&characterEncoding=utf-8";
-    private final String DBUSER = "dbuser";
-    private final String DBPWD = "1234";
+    private final String DBUSER = "root";
+    private final String DBPWD = "3315556";
     private Connection con;
     private Statement stmt;
     private ResultSet rs;
-
+    public static void main(String[] args) {
+    	DBForUser dbForUser  = new DBForUser();
+    }
     public DBForUser() {
         try {
             //加载驱动器, 下面的代码为加载MySQL驱动器
@@ -18,6 +20,7 @@ public class DBForUser {
             con = java.sql.DriverManager.getConnection(DBURL, DBUSER, DBPWD);
             //创建一个Statement 对象
             stmt = con.createStatement();
+            System.out.println("good");
         } catch (Exception e) {
            
         }

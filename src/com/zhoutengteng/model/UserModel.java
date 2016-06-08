@@ -1,18 +1,24 @@
 package com.zhoutengteng.model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.xml.bind.UnmarshallerHandler;
+
 public class UserModel {
-	private int id;
-	private String name;
-	private int sex;
-	private String password;
-	private String mail;
-	private String phone;
-	private String headImageAdd;
-	private String addr;
+	private int id = 0;
+	private String name = "";
+	private int sex = 0;
+	private String password = "";
+	private String mail = "";
+	private String phone = "";
+	private String headImageAdd = "";
+	private String addr = "";
 	private List<UserModel> contactPeopleList;
-	private int rate;
+	private int rate = 0;
 	
 	public String getName() {
 		return name;
@@ -76,40 +82,150 @@ public class UserModel {
 	public int getId() {
 		return id;
 	}
-	
+	public void setId(int userId) {
+		this.id = userId;
+	}
 	public boolean saveOneUser(UserModel user) {
-		
-		return true;
+		DBforUser dBforUser = new DBforUser();
+		String sql = "insert into users values " + "(" +user.toString()+ ")";
+		try {
+			dBforUser.getStatement().executeUpdate(sql);
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block	
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	public boolean deleteOneUser(int id) {
-		
-		return true;
+		DBforUser dBforUser = new DBforUser();
+		CommentModel commentModel = new CommentModel();
+		RecordModel recordModel = new RecordModel();
+		commentModel.deleteOneCommentByPeopleId(id);
+		recordModel.deleteOneRecordByPeopleId(id);
+		List<UserModel> list = lookOneUser(id).getContactPeopleList();
+		for (int i = 0; i < list.size(); i++) {
+			UserModel peopleIn = lookOneUser(list.get(i).getId());
+			peopleIn.deleteOneUserFromPeopleList(id);
+			updateOneUser(peopleIn);
+		}
+		String sql = "delete from users where id = " + id;
+		try {
+			dBforUser.getStatement().executeUpdate(sql);
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block	
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	public boolean updateOneUser(UserModel user) {
-		return true;
+		DBforUser dBforUser = new DBforUser();
+		String sql = "update users set id = " + user.getId() + ", name = "+'"'+user.getName()+'"'+ ", sex = " + user.getSex() + ", password = " + '"'+user.getPassword()+'"' + ", mail = " +'"'+user.getMail()+'"' + ", phone = " + '"'+user.getPhone()+'"' + ", headImageAdd = " + '"'+user.getHeadImageAdd()+'"' + ", addr = " + '"'+user.getAddr()+'"' + ", contactPeopleList = " + '"'+getListString(user.getContactPeopleList())+'"' + ", rate =" + user.getRate() + " where id = "+user.getId();
+		try {
+			dBforUser.getStatement().executeUpdate(sql);
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block	
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	public UserModel lookOneUser(int id) {
-		
-		return null;
+		DBforUser dBforUser = new DBforUser();
+		String sql = "select * from users where id = " + id;
+		try {
+			UserModel userModel = new UserModel();
+			ResultSet rs = dBforUser.getStatement().executeQuery(sql);
+			rs.next();
+			userModel.setId(rs.getInt("id"));
+			userModel.setName(rs.getString("name"));
+			userModel.setSex(rs.getInt("sex"));
+			userModel.setPassword(rs.getString("password"));
+			userModel.setMail(rs.getString("mail"));
+			userModel.setPhone(rs.getString("phone"));
+			userModel.setHeadImageAdd(rs.getString("headImageAdd"));
+			userModel.setAddr(rs.getString("addr"));
+			userModel.setContactPeopleList(userModel.strToList(rs.getString("contactPeopleList")));
+			userModel.setRate(rs.getInt("rate"));
+			rs.close();
+			dBforUser.close();
+			return userModel;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block	
+			e.printStackTrace();
+			return null;
+		}
+	}
+	public UserModel lookOneUserIgnoreList(int id) {
+		DBforUser dBforUser = new DBforUser();
+		String sql = "select * from users where id = " + id;
+		try {
+			UserModel userModel = new UserModel();
+			ResultSet rs = dBforUser.getStatement().executeQuery(sql);
+			rs.next();
+			userModel.setId(rs.getInt("id"));
+			userModel.setName(rs.getString("name"));
+			userModel.setSex(rs.getInt("sex"));
+			userModel.setPassword(rs.getString("password"));
+			userModel.setMail(rs.getString("mail"));
+			userModel.setPhone(rs.getString("phone"));
+			userModel.setHeadImageAdd(rs.getString("headImageAdd"));
+			userModel.setAddr(rs.getString("addr"));
+			userModel.setRate(rs.getInt("rate"));
+			rs.close();
+			dBforUser.close();
+			return userModel;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block	
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	public boolean addOneUserToPeopleList(int id) {
-		
+		UserModel uModel = lookOneUser(id);
+		this.contactPeopleList.add(uModel);
+		if (updateOneUser(this)) {
 		return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public boolean deleteOneUserFromPeopleList(int id) {
-		
-		return true;
+		Iterator<UserModel> it = this.contactPeopleList.iterator();
+		while(it.hasNext()) {
+			UserModel uModel = it.next();
+			if (uModel.getId() == id) {
+				it.remove();
+				if (updateOneUser(this)) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+		return false;
 	}
 	
 	@Override
 	public String toString() {
-		
-		return null;
+		String str = "";
+		str += this.getId();
+		str += ","+'"'+this.getName()+'"';
+		str += ","+this.getSex();
+		str += ","+'"'+this.getPassword()+'"';
+		str += ","+'"'+this.getMail()+'"';
+		str += ","+'"'+this.getPhone()+'"';
+		str += ","+'"'+this.getHeadImageAdd()+'"';
+		str += ","+'"'+this.getAddr()+'"';
+		str += ","+'"'+getListString(this.getContactPeopleList())+'"';
+		str += ","+this.getRate();
+		return str;
 	}
 	
 	/**
@@ -118,13 +234,78 @@ public class UserModel {
 	 * @return 
 	 */
 	public UserModel strToUser(String str) {
-		
-		return null;
+		UserModel uModel = new UserModel();
+		String[] columnSet = str.split(",");
+		uModel.setId(Integer.parseInt(columnSet[0]));
+		uModel.setSex(Integer.parseInt(columnSet[1]));
+		uModel.setPassword(columnSet[2]);
+		uModel.setMail(columnSet[3]);
+		uModel.setPhone(columnSet[4]);
+		uModel.setHeadImageAdd(columnSet[5]);
+		uModel.setAddr(columnSet[6]);
+		uModel.setContactPeopleList(strToList(columnSet[7]));
+		uModel.setRate(Integer.parseInt(columnSet[8]));
+		return uModel;
 	}
 	
 	public List<UserModel> getAllUsers() {
-		
-		return null;
+		DBforUser dBforUser = new DBforUser();
+		String sql = "select * from users";
+		List<UserModel> list = new ArrayList<UserModel>();	
+		try {
+			ResultSet rs = dBforUser.getStatement().executeQuery(sql);
+			while(rs.next()) {
+			UserModel userModel = new UserModel();
+			userModel.setId(rs.getInt("id"));
+			userModel.setName(rs.getString("name"));
+			userModel.setSex(rs.getInt("sex"));
+			userModel.setPassword(rs.getString("password"));
+			userModel.setMail(rs.getString("mail"));
+			userModel.setPhone(rs.getString("phone"));
+			userModel.setHeadImageAdd(rs.getString("headImageAdd"));
+			userModel.setAddr(rs.getString("addr"));
+			userModel.setContactPeopleList(userModel.strToList(rs.getString("contactPeopleList")));
+			userModel.setRate(rs.getInt("rate"));
+			list.add(userModel);
+			}
+			rs.close();
+			dBforUser.close();
+			return list;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block	
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 * @param cpl
+	 * @return contactPeopleList的字符串形式
+	 */
+	public String getListString(List<UserModel> cpl) {
+		String str = "";
+		if (cpl != null && cpl.size() != 0) {
+		str += cpl.get(0).getId();
+		for (int i = 1; i < cpl.size(); i++) {
+			str += "," + cpl.get(i).getId();
+		}
+		}
+		return str;
+	}
+	
+	/**
+	 * @param str
+	 * @return contactPeopleList
+	 */
+	public List<UserModel> strToList(String str) {
+		List<UserModel> list = new ArrayList<UserModel>();
+		if (!str.equals("")) {
+		String[] columnSet = str.split(",");
+		for (int i = 0; i < columnSet.length; i++) {
+			list.add(lookOneUserIgnoreList(Integer.parseInt(columnSet[i])));
+		}
+		}
+		return list;
 	}
 
 }
