@@ -17,7 +17,7 @@ CREATE TABLE `xitongfenxi`.`users` (
   PRIMARY KEY (`id`)) ENGINE = INNODB DEFAULT CHARSET=utf8;
 	
 CREATE TABLE `xitongfenxi`.`records` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NOT NULL,
   `label` VARCHAR(45) NULL,
   `content` VARCHAR(45) NOT NULL,
@@ -80,6 +80,33 @@ INSERT INTO `xitongfenxi`.`records` (`id`,`title`,`label`,`content`,`startTime`,
 INSERT INTO `xitongfenxi`.`records` (`id`,`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`,`joinPeopleList`) VALUES (12, "一起跑内环11", "体育", "详细介绍", "2016-09-02", "2016-10-01", 1, "2,3,4");
 INSERT INTO `xitongfenxi`.`records` (`id`,`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`,`joinPeopleList`) VALUES (13, "一起跑内环12", "体育", "详细介绍", "2016-09-02", "2016-10-01", 1, "2,3,4");
 INSERT INTO `xitongfenxi`.`records` (`id`,`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`,`joinPeopleList`) VALUES (14, "一起跑内环13", "体育", "详细介绍", "2016-09-02", "2016-10-01", 1, "2,3,4");
+
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`, `joinPeopleList`) VALUES ( "一起吃饭1", "体育", "详细介绍", "2016-09-02", "2016-10-01", 2, "1,3,4");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`,`joinPeopleList`) VALUES ( "一起吃饭2", "体育", "详细介绍", "2016-09-02", "2016-10-01", 2, "1,3,4,6");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`, `joinPeopleList`) VALUES ( "一起吃饭3", "体育", "详细介绍", "2016-09-02", "2016-10-01",2, "1,3,4");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`,`joinPeopleList`) VALUES ( "一起吃饭4", "体育", "详细介绍", "2016-09-02", "2016-10-01", 2, "1,3,4,6");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`, `joinPeopleList`) VALUES ( "一起吃饭5", "体育", "详细介绍", "2016-09-02", "2016-10-01", 2, "1,3,4");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`,`joinPeopleList`) VALUES ( "一起吃饭6", "体育", "详细介绍", "2016-09-02", "2016-10-01", 2, "1,3,4,6");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`, `joinPeopleList`) VALUES ( "一起吃饭7", "体育", "详细介绍", "2016-09-02", "2016-10-01", 2, "1,3,4");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`,`joinPeopleList`) VALUES ( "一起吃饭8", "体育", "详细介绍", "2016-09-02", "2016-10-01", 2, "1,3,4,6");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`, `joinPeopleList`) VALUES ( "一起吃饭9", "体育", "详细介绍", "2016-09-02", "2016-10-01", 2, "1,3,4");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`,`joinPeopleList`) VALUES ( "一起吃饭10", "体育", "详细介绍", "2016-09-02", "2016-10-01", 2, "1,3,4,6");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`, `joinPeopleList`) VALUES ( "一起吃饭11", "体育", "详细介绍", "2016-09-02", "2016-10-01", 2, "1,3,4");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`,`joinPeopleList`) VALUES ( "一起吃饭12", "体育", "详细介绍", "2016-09-02", "2016-10-01", 2, "1,3,4,6");
+
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`, `joinPeopleList`) VALUES ( "一起看电影1", "体育", "详细介绍", "2016-09-02", "2016-10-01", 3, "1,4");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`,`joinPeopleList`) VALUES ( "一起看电影2", "体育", "详细介绍", "2016-09-02", "2016-10-01", 3, "1,4,6");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`, `joinPeopleList`) VALUES ( "一起看电影3", "体育", "详细介绍", "2016-09-02", "2016-10-01",3, "1,4");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`,`joinPeopleList`) VALUES ( "一起看电影4", "体育", "详细介绍", "2016-09-02", "2016-10-01", 3, "1,4,6");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`, `joinPeopleList`) VALUES ( "一起看电影15", "体育", "详细介绍", "2016-09-02", "2016-10-01", 3, "1,4");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`,`joinPeopleList`) VALUES ( "一起看电影6", "体育", "详细介绍", "2016-09-02", "2016-10-01", 3, "1,4,6");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`, `joinPeopleList`) VALUES ( "一起看电影1", "体育", "详细介绍", "2016-09-02", "2016-10-01", 3, "1,4");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`,`joinPeopleList`) VALUES ( "一起看电影1", "体育", "详细介绍", "2016-09-02", "2016-10-01", 3, "1,4,6");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`, `joinPeopleList`) VALUES ( "一起一起看电影1吃饭9", "体育", "详细介绍", "2016-09-02", "2016-10-01", 3, "1,4");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`,`joinPeopleList`) VALUES ( "一起吃一起看电影1饭10", "体育", "详细介绍", "2016-09-02", "2016-10-01", 3, "1,4,6");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`, `joinPeopleList`) VALUES ( "一起吃一起看电影1饭11", "体育", "详细介绍", "2016-09-02", "2016-10-01", 3, "1,4");
+INSERT INTO `xitongfenxi`.`records` (`title`,`label`,`content`,`startTime`,`endTIme`, `peopleId`,`joinPeopleList`) VALUES ( "一起吃饭1一起看电影12", "体育", "详细介绍", "2016-09-02", "2016-10-01", 3, "1,4,6");
+
 
 INSERT INTO `xitongfenxi`.`comments` (`id`, `peopleId`,`recordId`,`content`) VALUES (1,2,1,"内环1");
 INSERT INTO `xitongfenxi`.`comments` (`id`, `peopleId`,`recordId`,`content`) VALUES (2,3,1,"内环1");
