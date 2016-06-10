@@ -60,8 +60,8 @@
 3.项目的github地址 https://github.com/zhoutengteng/xitongfenxi<br /> 
 ###
 4项目说明：<br /> 
-	[size=2em]本实现，未采用任何框架，采用的是纯java lib库，所以迁移很方便<br /> 
-	由于未使用什么spring之类的框架，导致前后端的交互需要自己完成一个类似http协议的socket通信，基本message中就是完成通信的代码，这里就耗费了大量<br /> 
+	本实现，未采用任何框架，采用的是纯java lib库，所以迁移很方便<br /> 
+	tab由于未使用什么spring之类的框架，导致前后端的交互需要自己完成一个类似http协议的socket通信，基本message中就是完成通信的代码，这里就耗费了大量<br /> 
 的时间<br /> 
 	另外大家都知道，java做界面，不如web那种html做界面舒服，可以说我用java写一个界面，web可以写好几个界面，而且web的效果还比java好看，我这里只想
 说明一点，做一个好看的java不容易界面，关键java不存在嵌套空间(而web得div是可以嵌套的)，所以有些设计实现不了，导致功能什么的全部收到限制，故没有完成<br /> 
