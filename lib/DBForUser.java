@@ -17,7 +17,8 @@ public class DBForUser {
             //建立数据库连接
             con = java.sql.DriverManager.getConnection(DBURL, DBUSER, DBPWD);
             //创建一个Statement 对象
-            stmt = con.createStatement();
+            stmt = con.createStatement(); 
+            
         } catch (Exception e) {
            
         }
