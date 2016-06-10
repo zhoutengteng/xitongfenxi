@@ -1,31 +1,43 @@
 package com.zhoutengteng.control;
-
+import java.text.ParseException;
+import java.util.*;
 import com.zhoutengteng.model.RecordModel;
 import com.zhoutengteng.model.UserModel;
+import java.io.Serializable;
 
-
-public class adminControl {
+public class adminControl implements Serializable {
 	/**
-	 * @param userModel 待添加的用户
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @param userModel 寰呮坊鍔犵殑鐢ㄦ埛
 	 * @return
 	 */
 	public boolean addPeople(UserModel userModel) {
-		
+		UserModel userManage = new UserModel();
+		userManage.addOneUserToPeopleList(userModel.getId());
 		return true;
 	}
 	
 	public boolean updatePeople(UserModel userModel) {
-		return true;
+		UserModel userManage = new UserModel();
+		return userManage.updateOneUser(userModel);
 		
 	}
 	
 	public boolean deletePeople(int id) {
-		
-		return true;
+		UserModel userManage = new UserModel();
+		return userManage.deleteOneUser(id);
 	}
 	
-	public boolean addRecord(int parentId, RecordModel recordModel) {
-		
+	public boolean addRecord(int parentId, RecordModel recordModel) throws ParseException {
+		RecordModel recordManage = new RecordModel();
+		List<RecordModel> allRecordModel = recordManage.getAllRecords();
+		for (int i =0; i< allRecordModel.size(); i++) {
+			
+		}
 		return true;
 	}
 	
